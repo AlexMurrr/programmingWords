@@ -1,0 +1,29 @@
+.wrapper {
+    background: rgb(214, 240, 238);
+    font-family: fantasy;
+    margin: 130px auto;
+    width: 700px;
+    font-size: 18px;
+    border: 2px solid ;
+}
+
+.liWord {
+    margin: 30px auto;
+    font-size: 30px;
+}
+
+li {
+    list-style-type: none;
+   }
+.btn {
+
+}
+.translate {
+    width: 600px;
+    margin: 30px auto;
+    background-color:#fff;
+    box-shadow: 0 10px 10px #ccc;
+    border-radius: 10px;
+    height: 100px;
+    font-size: 20px;
+}
