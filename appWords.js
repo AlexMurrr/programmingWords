@@ -36,7 +36,6 @@ let arrWordsRnd = arrChoiceElRnd(words);
 let wordsWithTransfer = arrWordsRnd.map(item =>item + ' - ' + words[item] + ' ');
 
 //делаем список из глаголов с переводом
-
 const div = document.createElement('div');
 div.classList.add('wrapper');
 
@@ -59,13 +58,12 @@ function createUlFromArr (arr){
 
 createUlFromArr(wordsWithTransfer);
 
-//получаем объект с массивами результатами перевода
-
+//проверяем перевод и получаем объект с массивами результатами перевода
 let wordsResultTranslate = {};
 
 function startTranslate (arr){
 
-    let arrWordsResultTranslate = [];
+    let arrResultTranslate = [];
     let arrWordsInput = [];
     div.remove();
     btnStart.remove();
@@ -73,19 +71,20 @@ function startTranslate (arr){
     for(let i=0; i<arr.length; i++){
         let a = prompt('Переведите на английский: ' + words[arr[i]].toUpperCase(), 'перевод');
         if(arr[i] === a){
-            arrWordsResultTranslate[i]= arr[i] + '1';
+            arrResultTranslate[i]= true;
             arrWordsInput[i] = a;
             alert( 'Правильный перевод' );
         }
             else if (a===null) break;
             else{
-                arrWordsResultTranslate[i]= arr[i] + '0';
+                arrResultTranslate[i]= false;
                 arrWordsInput[i] = a;
                 alert( `Вы ошиблись, правильный перевод: ${arr[i].toUpperCase()}`  );
             }
     }
-    wordsResultTranslate.key1 = arrWordsResultTranslate;
+    wordsResultTranslate.key1 = arrResultTranslate;
     wordsResultTranslate.key2 = arrWordsInput;
+    body.appendChild(btnShowResult);
 }
 
 let divResAll = document.createElement('div');
@@ -100,51 +99,34 @@ body.appendChild(btnStart);
 const btnShowResult = document.createElement('button');
 btnShowResult.innerHTML = 'ПОКАЗАТЬ РЕЗУЛЬТАТ';
 btnShowResult.addEventListener('click', showResultTranslate);
-body.appendChild(btnShowResult);
+
+const btnStartAgain = document.createElement('button');
+btnStartAgain.innerHTML = 'ЕЩЕ РАЗ';
+btnStartAgain.addEventListener('click', () => location.reload());
+
 
 function showResultTranslate(){
 
-for (let i=0; i<resTrans.key1.length; i++){
+    btnShowResult.remove();
+    body.appendChild(btnStartAgain);
 
-    let divRes = document.createElement('div');
-    divRes.classList = 'translate';
+    for (let i=0; i<wordsResultTranslate.key1.length; i++){
 
-    if(resTrans.key1[i].substr(resTrans.key1[i].length-1) === '0'){
+        let divRes = document.createElement('div');
+        divRes.classList = 'translate';
+
+    if(wordsResultTranslate.key1[i] === false){
         divRes.textContent = 'Ошибка';
-        divRes.textContent = `Вы ответили ${resTrans.key2[i]}
-                                правильно ${resTrans.key1[i]}`
+        divRes.textContent = `Вы ответили ${wordsResultTranslate.key2[i]}
+                                правильно ${arrWordsRnd[i]}`
         divRes.style.border = '4px outset red';
-    } else divRes.textContent = 'Верно';
+    } else{ divRes.textContent = 'Верно';
+            divRes.style.border = '4px outset green';
+          }
 
     divResAll.appendChild(divRes);
-
     }
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
