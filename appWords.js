@@ -15,42 +15,30 @@ let words = {
 
 
 function arrChoiceElRnd(obj){
-
 //получаем массив из 5 случайных и уникальных слов
 
     let arrWordsKeys = Object.keys(obj);
     let arr = [];
     let setWords = new Set();
-
         for (let i = 0; i<arrWordsKeys.length; i++){
-
             arr[i] = arrWordsKeys[(Math.floor(Math.random() *(arrWordsKeys.length)))];
-
                 setWords.add(arr[i]);
                 arr =Array.from(setWords);
                     if(arr.length>=5)
                         break;
         }
-
     return arr;
-
 }
 
 let arrWordsRnd = arrChoiceElRnd(words);
 
-
 //получаем массив слов с переводом
 let wordsWithTransfer = arrWordsRnd.map(item =>item + ' - ' + words[item] + ' ');
-
-
-
-///////////////////////////////////
 
 //делаем список из глаголов с переводом
 
 const div = document.createElement('div');
 div.classList.add('wrapper');
-//div.style.background ='rgb(214, 240, 238)';
 
 const body = document.body;
 body.appendChild(div);
@@ -67,59 +55,54 @@ function createUlFromArr (arr){
         liElement.textContent = item;
         ulWodsWithTrans.appendChild(liElement);
     });
-
-
 }
 
 createUlFromArr(wordsWithTransfer);
 
-
-
-//////////////////////////////////////////
-
 //получаем объект с массивами результатами перевода
 
+let wordsResultTranslate = {};
 
-function resultOfTranslate (arr){
+function startTranslate (arr){
 
-    let wordsResultTranslate = {};
     let arrWordsResultTranslate = [];
-    let arrResultError = [];
-
+    let arrWordsInput = [];
+    div.remove();
+    btnStart.remove();
 
     for(let i=0; i<arr.length; i++){
-
         let a = prompt('Переведите на английский: ' + words[arr[i]].toUpperCase(), 'перевод');
         if(arr[i] === a){
             arrWordsResultTranslate[i]= arr[i] + '1';
-            arrResultError[i] = a;
+            arrWordsInput[i] = a;
             alert( 'Правильный перевод' );
         }
             else if (a===null) break;
-
             else{
                 arrWordsResultTranslate[i]= arr[i] + '0';
-                arrResultError[i] = a;
+                arrWordsInput[i] = a;
                 alert( `Вы ошиблись, правильный перевод: ${arr[i].toUpperCase()}`  );
             }
     }
-
     wordsResultTranslate.key1 = arrWordsResultTranslate;
-    wordsResultTranslate.key2 = arrResultError;
-
-    return wordsResultTranslate;
+    wordsResultTranslate.key2 = arrWordsInput;
 }
-
-let resTrans = resultOfTranslate(arrWordsRnd);
-
-
-
 
 let divResAll = document.createElement('div');
 body.appendChild(divResAll);
 divResAll.classList.add('allDivTranslate');
 
+const btnStart = document.createElement('button');
+btnStart.innerHTML = 'НАЧАТЬ';
+btnStart.addEventListener('click', () => startTranslate(arrWordsRnd));
+body.appendChild(btnStart);
 
+const btnShowResult = document.createElement('button');
+btnShowResult.innerHTML = 'ПОКАЗАТЬ РЕЗУЛЬТАТ';
+btnShowResult.addEventListener('click', showResultTranslate);
+body.appendChild(btnShowResult);
+
+function showResultTranslate(){
 
 for (let i=0; i<resTrans.key1.length; i++){
 
@@ -135,8 +118,8 @@ for (let i=0; i<resTrans.key1.length; i++){
 
     divResAll.appendChild(divRes);
 
+    }
 }
-
 
 
 
