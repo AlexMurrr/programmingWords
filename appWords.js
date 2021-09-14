@@ -11,6 +11,7 @@ let words = {
     invoke: 'вызывать, применять',
     handler: 'обработчик',
     fluent: 'беглый, текучий, гладкий',
+    template: 'шаблон',
 }
 
 
@@ -74,8 +75,8 @@ function startTranslate (arr){
             arrResultTranslate[i]= true;
             arrWordsInput[i] = a;
             alert( 'Правильный перевод' );
-        }
-            else if (a===null) break;
+            }else if (a===null){
+                break;}
             else{
                 arrResultTranslate[i]= false;
                 arrWordsInput[i] = a;
@@ -98,6 +99,7 @@ body.appendChild(btnStart);
 
 const btnShowResult = document.createElement('button');
 btnShowResult.innerHTML = 'ПОКАЗАТЬ РЕЗУЛЬТАТ';
+btnShowResult.classList = 'btnShow';
 btnShowResult.addEventListener('click', showResultTranslate);
 
 const btnStartAgain = document.createElement('button');
@@ -116,18 +118,17 @@ function showResultTranslate(){
         divRes.classList = 'translate';
 
     if(wordsResultTranslate.key1[i] === false){
-        divRes.textContent = 'Ошибка';
-        divRes.textContent = `Вы ответили ${wordsResultTranslate.key2[i]}
-                                правильно ${arrWordsRnd[i]}`
-        divRes.style.border = '4px outset red';
+
+        divRes.textContent = `Вы ответили - ${wordsResultTranslate.key2[i]}
+                            правильно - ${arrWordsRnd[i]}`;
+        divRes.style.border = '2px outset red';
     } else{ divRes.textContent = 'Верно';
-            divRes.style.border = '4px outset green';
+            divRes.style.border = '2px outset green';
           }
 
     divResAll.appendChild(divRes);
     }
 }
-
 
 
 
