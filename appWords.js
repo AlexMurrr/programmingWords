@@ -67,7 +67,7 @@ function startTranslate (arr){
     let arrResultTranslate = [];
     let arrWordsInput = [];
     div.remove();
-    btnStart.remove();
+    //btnStart.remove();
 
     for(let i=0; i<arr.length; i++){
         let a = prompt('Переведите на английский: ' + words[arr[i]].toUpperCase(), 'перевод');
@@ -92,10 +92,12 @@ let divResAll = document.createElement('div');
 body.appendChild(divResAll);
 divResAll.classList.add('allDivTranslate');
 
-const btnStart = document.createElement('button');
-btnStart.innerHTML = 'НАЧАТЬ';
-btnStart.addEventListener('click', () => startTranslate(arrWordsRnd));
-body.appendChild(btnStart);
+//const btnStart = document.createElement('button');
+//btnStart.innerHTML = 'НАЧАТЬ';
+////btnStart.addEventListener('click', () => startTranslate(arrWordsRnd));
+//body.appendChild(btnStart);
+
+
 
 const btnShowResult = document.createElement('button');
 btnShowResult.innerHTML = 'ПОКАЗАТЬ РЕЗУЛЬТАТ';
@@ -129,6 +131,9 @@ function showResultTranslate(){
     divResAll.appendChild(divRes);
     }
 }
+
+setTimeout( () => startTranslate(arrWordsRnd), 5000);
+
 
 
 
