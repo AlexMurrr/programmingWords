@@ -23,7 +23,7 @@ function arrChoiceElRnd(obj) {
   const arrWordsKeys = Object.keys(obj);
   let arr = [];
   const setWords = new Set();
-  for (let i = 0; i < arrWordsKeys.length; i++) {
+  for (let i = 0; i < arrWordsKeys.length; i += i) {
     arr[i] = arrWordsKeys[(Math.floor(Math.random() * (arrWordsKeys.length)))];
     setWords.add(arr[i]);
     arr = Array.from(setWords);
@@ -99,7 +99,7 @@ function startTranslate(arr) {
   div.remove();
   btnStart.remove();
 
-  for (let i = 0; i < arr.length; i++) {
+  for (let i = 0; i < arr.length; i += i) {
     const a = prompt(`Переведите на английский: ${words[arr[i]].toUpperCase()}`, 'перевод');
     if (arr[i] === a) {
       arrResultTranslate[i] = true;
@@ -124,7 +124,7 @@ function showResultTranslate() {
   btnStartAgain1.remove();
   body.appendChild(btnStartAgain);
 
-  for (let i = 0; i < wordsResultTranslate.key1.length; i++) {
+  for (let i = 0; i < wordsResultTranslate.key1.length; i += i) {
     const divRes = document.createElement('div');
     divRes.classList = 'translate';
 

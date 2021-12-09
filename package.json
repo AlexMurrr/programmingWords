@@ -1,6 +1,6 @@
 {
   "name": "programmingwords",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "learn words",
   "main": "appWords.js",
   "scripts": {
